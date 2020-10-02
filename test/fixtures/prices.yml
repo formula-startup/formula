@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sell: 1
+  fee: 1
+  benefit: 1
+  products: one
+
+two:
+  sell: 1
+  fee: 1
+  benefit: 1
+  products: two

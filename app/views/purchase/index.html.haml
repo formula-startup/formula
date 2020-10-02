@@ -1,0 +1,60 @@
+- content_for(:html_title) {'購入完了'}
+= render partial: 'signup/simple-header'
+.signup-container
+  .purchase-header
+    .purchase-header__title
+      .purchase-header__title--icon
+        %i.far.fa-clock
+      .purchase-header__title--body
+        発送をお待ちください
+    .purchase-header__text
+      出品者の発送通知をお待ちください
+  %h2.signup-header 購入が完了しました
+  .purchase-product-container
+    .purchase-product-container__image
+      = image_tag @product.product_images.first.image_url, size: "120x120"
+    .purchase-product-container__title
+      = @product.title
+  .purchase-product-container
+    .purchase-product-container__price
+      = "¥#{@product.price.to_s(:delimited)}"
+    .purchase-product-container__tax
+      - if @product.deliver_person == "送料込み(出品者負担)"
+        送料込み
+      - else
+        ＋ 送料 ¥500
+  .purchase-buyer-container
+    .purchase-buyer-container__content
+      %h3.purchase-buyer-container__title
+        配送先
+      %p.purchase-buyer-container__text
+        = "〒#{current_user.profile.postal_code}"
+        %br
+        = @post_address
+        %br
+        = @post_name
+  .purchase-buyer-container
+    .purchase-buyer-container__content
+      %h3.purchase-buyer-container__title
+        支払い方法
+      %p.purchase-buyer-container__text
+        = "**** **** ****" + @customer_card.last4
+        %br
+        = @customer_card.exp_month.to_s + "/" + @customer_card.exp_year.to_s
+        %br
+        = @customer_card.brand
+  .purchase-buyer-container
+    %h3.purchase-buyer-container__title
+      発送通知後の流れ
+    .purchase-buyer-container__text
+      商品を受け取ったら
+      %br
+      出品者の評価をしましょう。
+      %br
+      購入代金が出品者に振り込まれます。
+      %br
+      評価後に取引は完了です。
+    .purchase-buyer-container__link
+      = link_to 'マイページへもどる',user_path(current_user),{class: "default-link-text"}
+= render partial: 'signup/simple-footer'
+

@@ -1,0 +1,144 @@
+.sell-container
+  .signup-container
+    = render partial: '/signup/simple-header'
+    = form_for @product, url:product_path ,method: :patch do |f|
+      .signup-top
+        %h2.signup-header
+          商品の情報を入力
+      .sell-upload-form
+        -# 画像アップロード
+        .sell-upload-form__image.sell-container-all-padding.container-border-top
+          %p
+            = label :image, '出品画像',class: 'sell-upload-label'
+            %span.signup-form-container__span.span-need
+              必須
+          .upload-box
+            %ul#preview
+          - if judge_blank(@product, :product_images)
+            .input-error 画像がありません
+        -# 商品名、商品の説明
+        .signup-form-container.registration-form__first-container.sell-container-all-padding.container-border-top
+          .signup-form-container__title
+            %p
+              = label :title, '商品名',class: 'signup-label'
+              %span.signup-form-container__span.span-need 必須
+          = f.text_field :title, placeholder: '商品名（必須40文字まで）', class: 'default-input sell-input'
+          - if judge_blank(@product, :title)
+            .input-error 入力してください
+          - if judge_length_long(@product, :title, 40)
+            .input-error 40文字以下で入力してください
+        .signup-form-container.registration-form__first-container.sell-container-side-padding
+          .signup-form-container__title
+            %p
+              = label :text, '商品の説明',class: 'signup-label'
+              %span.signup-form-container__span.span-need 必須
+          = f.text_area :text, placeholder: "商品の説明（必須1,000文字以内）（色、素材、重さ、定価、注意点など）例）　2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。 ", class: 'default-input sell-input-area'
+          - if judge_blank(@product, :text)
+            .input-error 入力してください
+          - if judge_length_long(@product, :title, 1000)
+            .input-error 1000文字以下で入力してください
+        -# 商品の明細
+        .sell-container-all-padding.container-border-top.flex
+          .sell-container-left
+            商品の詳細
+          .sell-container-right
+            %p
+              = label :category_index, 'カテゴリー',class: 'signup-label'
+              %span.signup-form-container__span.span-need 必須
+            .select-wrap
+              = f.collection_select(:category_index_id, CategoryIndex.all,:id,:name,{prompt:"---"}, {class: 'default-select sell-select-box'})
+              %i.select-arrow.fas.fa-chevron-down
+            - if judge_blank(@product, :category_index_id)
+              .input-error 選択してください
+
+            -# ここにbigcategory,smallcategoryを挿入する
+
+            %p.margin-2rem
+              = label :fresh_status, '商品の状態',class: 'signup-label'
+              %span.signup-form-container__span.span-need 必須
+            .select-wrap
+              = f.select:fresh_status, ProductFreshness.pluck(:status).unshift('---'),{},{class: 'default-select sell-select-box sell-input'}
+              %i.select-arrow.fas.fa-chevron-down
+            - if judge_exception(@product, :fresh_status)
+              .input-error 選択してください
+        -# 配送について
+        .sell-container-all-padding.container-border-top.flex
+          .sell-container-left
+            %p
+              配送について
+              = link_to "" do
+                %i.fas.fa-question-circle.link-space-reset
+          .sell-container-right
+            %p
+              = label :deliver_person, '配送料の負担',class: 'signup-label'
+              %span.signup-form-container__span.span-need 必須
+            .select-wrap
+              = f.select :deliver_person, DeliverFee.pluck(:fee).unshift('---'),{},{class: 'default-select select-wrap__sell-select-box'}
+              %i.select-arrow.fas.fa-chevron-down
+            - if judge_exception(@product, :deliver_person)
+              .input-error 選択してください
+            %p.margin-2rem
+              = label :deliver_leadtime, '配達の方法',class: 'signup-label'
+              %span.signup-form-container__span.span-need 必須
+            .select-wrap
+              = f.select :deliver_way,DeliverWay.pluck(:way).unshift('---'),{},{class: 'default-select select-wrap__sell-select-box'}
+              %i.select-arrow.fas.fa-chevron-down
+            - if judge_exception(@product, :deliver_way)
+              .input-error 選択してください
+            %p.margin-2rem
+              = label :from_area, '発送元の地域',class: 'signup-label'
+              %span.signup-form-container__span.span-need 必須
+            .select-wrap
+              = f.select :from_area ,Prefecture.pluck(:name).unshift('都道府県', '未定'),{},{class: 'default-select select-wrap__sell-select-box'}
+              %i.select-arrow.fas.fa-chevron-down
+            - if judge_exception(@product, :from_area)
+              .input-error 選択してください
+            %p.margin-2rem
+              = label :deliver_leadtime, '発送までの日数',class: 'signup-label'
+              %span.signup-form-container__span.span-need 必須
+            .select-wrap
+              = f.select :deliver_leadtime,DeliverDay.pluck(:days).unshift('---'),{},{class: 'default-select select-wrap__sell-select-box'}
+              %i.select-arrow.fas.fa-chevron-down
+            - if judge_exception(@product, :deliver_leadtime)
+              .input-error 選択してください
+        -# 販売価格
+        .sell-container-all-padding.container-border-top.flex
+          .sell-container-left.link-space-reset
+            %p
+              販売価格
+              %span.link-space-reset (300~9,999,999)
+              = link_to "" do
+                %i.fas.fa-question-circle
+          .sell-container-right
+            .sell-container-right__price-wrapper
+              %p
+                = label :price, '価格',class: 'signup-label' do
+                  価格
+                  %span.signup-form-container__span.span-need 必須
+              .sell-container-right__price-wrapper__input
+                %p
+                  ¥
+                  = f.text_field :price, placeholder: "例：300", id:"product_price", class: 'default-input price ', style:"text-align:right"
+            - if @product.errors.details[:price].present?
+              .input-error 300以上9999999以下で入力してください
+            .sell-container-right__price-fee
+              .sell-container-right__price-fee__text
+                %p
+                  販売手数料(10%)
+              .sell-container-right__price-fee__price
+                %p#price_fee
+                  ー
+            .sell-container-right__price-benefit
+              %h2
+                販売利益
+              %h2#price_benefit
+                ー
+        -# 説明、出品ボタン
+        .sell-container-all-padding.container-border-top
+          .sell-container-submit
+            = f.submit value: "変更する",class: 'submit-btn submit-btn-red user-mypage-wrapper__main__credit__content__btn sell-container-submit__btn'
+          .sell-container-back
+            %p
+              = link_to product_path,class: 'submit-btn submit-btn-gray user-mypage-wrapper__main__credit__content__btn sell-container-back__btn' do
+                %span キャンセル
+  = render 'signup/simple-footer'

@@ -1,0 +1,230 @@
+= render "/layouts/main-header"
+
+.container
+  .container__product-details
+    %h1.container__product-details__product-name
+      = @product.title
+    .container__product-details__main
+      .container__product-details__main__images
+        .container__product-details__main__images__display
+          - if @product.sell_status == "SOLD"
+            .badge.sold
+              SOLD
+          -elsif @product.sell_status == "公開停止中"
+            .badge.stop
+              公開停止中
+          %ul.container__product-details__main__images__display__up
+            - @product.product_images.each do |product_image|
+              %li.container__product-details__main__images__display__up__slide-image
+                = image_tag product_image.image_url, size: "300x300"
+          %ul.container__product-details__main__images__display__down
+            - @product.product_images.each do |product_image|
+              %li.container__product-details__main__images__display__down__thumbnail-image
+                = image_tag product_image.image_url, size: "60x60"
+      %table.container__product-details__main__detail
+        %tbody
+          %tr
+            %th
+              出品者
+            %td
+              = link_to @product.user.nickname, ""
+              %div.evaluation
+                %div
+                  %i.far.fa-laugh
+                  = rand(100)
+                %div
+                  %i.fas.far.fa-meh
+                  = rand(100)
+                %div
+                  %i.far.fa-sad-tear
+                  = rand(100)
+          %tr
+            %th
+              カテゴリー
+            %td.category
+              = link_to "" do
+                .category
+                  %span
+                    = @category_name
+              = link_to "" do
+                .category
+                  %i.fas.fa-chevron-right
+                    %span
+                      = @bigcategory_name
+              = link_to "" do
+                .category
+                  %i.fas.fa-chevron-right
+                    %span
+                      = @smallcategory_name
+          %tr
+            %th
+              ブランド
+            %td
+              テクエキ
+          %tr
+            %th
+              商品の状態
+            %td
+              = @product.fresh_status
+          %tr
+            %th
+              配送料の負担
+            %td
+              = @product.deliver_person
+          %tr
+            %th
+              配送の方法
+            %td
+              = @product.deliver_way
+          %tr
+            %th
+              配送元地域
+            %td
+              = link_to @product.from_area, "#"
+          %tr
+            %th
+              発送日の目安
+            %td
+              = @product.deliver_leadtime
+
+    .container__product-details__price
+      %span.container__product-details__price__amount
+        ¥
+        = @product.price
+      %span.container__product-details__price__tax
+        (税込)
+      %span.container__product-details__price__delivery-fee
+        送料込み
+    .container__product-details__message
+      -if user_signed_in? && current_user.id == @product.user_id
+        = link_to "商品の編集", edit_product_path, class: "submit-btn submit-btn-red"
+        %p
+          or
+        = link_to "出品を再開する","", class: "submit-btn submit-btn-red"
+        = link_to "この商品を削除する", product_path, class: "submit-btn submit-btn-gray", method: "DELETE"
+      - elsif @product.sell_status == "出品中"
+        .container__product-details__message__money
+          売上金¥
+          = rand(1000)
+          とP
+          = rand(1000)
+          を
+          %br
+          お持ちです。
+        = link_to "購入画面に進む", new_product_purchase_path(@product), class: "container__product-details__purchase-screen-button"
+      - elsif @product.sell_status == "交渉中"
+        = link_to "この商品は交渉中です", "", class: "submit-btn submit-btn-gray"
+      - elsif @product.sell_status == "公開停止中"
+        = link_to "この商品は公開停止中です", "", class: "submit-btn submit-btn-gray"
+      - else
+        = link_to "この商品の取引は完了しました", "", class: "submit-btn submit-btn-gray"
+    .container__product-details__product-description
+      %p.container__product-details__product-description__inner
+        = simple_format @product.text
+    .container__product-details__buttons
+      .container__product-details__buttons__left
+        %button.container__product-details__buttons__left__heart
+          %i.far.fa-heart
+          %span
+            いいね!
+          %span
+            = rand (1000)
+        %button.container__product-details__buttons__left__report
+          %i.far.fa-flag
+          %span
+            不適切な商品の報告
+
+      .container__product-details__buttons__right
+        = link_to "" do
+          %i.fas.fa-lock
+          %span
+            あんしん・あんぜんへの取り組み
+
+  .container__comment
+    .container__comment__container
+      %form.container__comment__container__message-form
+        %p.container__comment__container__message-form__attention
+          相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
+        %textarea.container__comment__container__message-form__text
+        %button.container__comment__container__message-form__comment-btn
+          %span
+            コメントする
+
+  %ul.container__product-link
+    %li.container__product-link__prev
+      = link_to "" do
+        %i.fas.fa-chevron-left
+        前の商品
+    %li.container__product-link__next
+      = link_to "" do
+        次の商品
+        %i.fas.fa-chevron-right
+        
+  .container__social-media
+    %ul.container__social-media__box
+      %li.container__social-media__box__facebook
+        = link_to "" do
+          %i.fab.fa-facebook-square.fa-3x
+      %li.container__social-media__box__twitter
+        = link_to "" do
+          %i.fab.fa-twitter-square.fa-3x
+      %li.container__social-media__box__line
+        = link_to "" do
+          %i.fab.fa-line.fa-3x
+      %li.container__social-media__box__pinterest
+        = link_to "" do
+          %i.fab.fa-pinterest-square.fa-3x
+
+  .container__other-products
+    .container__other-products__login-user
+      %h2.container__other-products__login-user__title
+        = link_to "#{@product.user.nickname}さんのその他の出品", ""
+      .container__other-products__login-user__products
+        - @product.user.products.where(sell_status: "出品中").each do |product|
+          .container__other-products__login-user__products__product
+            = link_to "/products/#{product.id}", class:"container__other-products__login-user__products__product__link" do
+              %figure.container__other-products__login-user__products__product__link__image
+                = image_tag product.product_images.find_by(product_id: product.id).image_url, size:"220x220"
+              .container__other-products__login-user__products__product__link__body
+                %h3.container__other-products__login-user__products__product__link__body__name
+                  = product.title
+                .container__other-products__login-user__products__product__link__body__num
+                  .container__other-products__login-user__products__product__link__body__num__price
+                    ¥
+                    = product.price
+                  .container__other-products__login-user__products__product__link__body__num__heart
+                    %i.far.fa-heart
+                    %span
+                      = rand(1000)
+
+    .container__other-products__same-category
+      %h2.container__other-products__same-category__title
+        = link_to "カテゴリ その他の出品", ""
+      .container__other-products__same-category__products
+        - @products.each do |product|
+          .container__other-products__same-category__products__product
+            = link_to product_path(product.id), class:".container__other-products__same-category__products__product__link" do
+              %figure.container__other-products__same-category__products__product__link__image
+                = image_tag src= product.product_images.first.image_url, size: "220x220"
+              .container__other-products__same-category__products__product__link__body
+                %h3.container__other-products__same-category__products__product__link__body__name
+                  = product.title
+                .container__other-products__same-category__products__product__link__body__num
+                  .container__other-products__same-category__products__product__link__body__num__price
+                    ¥
+                    = product.price
+
+  %navi.container__bread-crumbs
+    %ul.container__bread-crumbs__list
+      %li.container__bread-crumbs__list__mercari
+        = link_to root_path do
+          メルカリ
+          %i.fas.fa-chevron-right
+      %li.container__bread-crumbs__list__current-product
+        %span
+          = @product.title
+          
+%footer
+  =render "layouts/footer-advertisement"
+  %nav
+  = render "layouts/footer-black"

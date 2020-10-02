@@ -1,0 +1,19 @@
+.main__products
+  .main__products__product
+    .main__products__product__header
+      テックエキスパート新着アイテム
+      .main__products__product__header__next
+        = link_to "#" do
+          もっと見る
+          %i.fa.fa-chevron-right
+    .main__products__product__contents
+      - @products.each do |product|
+        .main__products__product__contents__content.effect-fade
+          = link_to "/products/#{product.id}" do
+            .main__products__product__contents__content__image
+              -# ※carrierwaveなどで画像を正方形に加工する必要あり※
+              = image_tag product.product_images.find_by(product_id: product.id).image_url
+              .main__products__product__contents__content__image__price
+                = "¥#{product.price}"
+            .main__products__product__contents__content__name
+              %p= "#{product.title}"

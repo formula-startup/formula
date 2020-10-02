@@ -1,0 +1,33 @@
+= render "layouts/main-header"
+-# パンくず最後のページだけspan、リンクはaタグを使用する。
+-content_for :current_page do
+  %span.current_page
+    = link_to users_path do
+      マイページ
+    %i.fa.fa-chevron-right
+    %span.current_page__now
+      プロフィール
+= render "layouts/breadcrumbs"
+.user-mypage-wrapper
+  .user-mypage-wrapper__main
+    .user-mypage-wrapper__main__profile-edit
+      .user-mypage-wrapper__main__profile-edit__title
+        プロフィール
+      %form.user-mypage-wrapper__main__profile-edit__content
+        .user-mypage-wrapper__main__profile-edit__content__icon
+          = image_tag src="https://static.mercdn.net/images/member_photo_noimage_thumb.png", size: "60x60", class: "user-mypage-wrapper__main__profile-edit__content__icon__img"
+          %input.user-mypage-wrapper__main__profile-edit__content__icon__input-default{placeholder: "例)AYA☆セール中", type: "text", value: current_user.nickname, name: "nickname"}
+
+        .user-mypage-wrapper__main__profile-edit__content__index
+          %textarea.user-mypage-wrapper__main__profile-edit__content__index__text{placeholder: "例）こんにちは☆ ご覧いただきありがとうございます！かわいいものやきれいめオフィスカジュアル中心に出品しています。服のサイズは主に9号です。気持ちよくお取引できるよう心がけていますので、商品や発送方法などご質問がありましたらお気軽にどうぞ♪", value: "", name: "introduction"}
+          = link_to '#',class: 'submit-btn submit-btn-red user-mypage-wrapper__main__profile-edit__content__index__btn' do
+            %span 変更する
+        
+  = render "layouts/user-navi"  
+
+-# footer
+= render "layouts/footer-advertisement"
+= render "layouts/footer-black"
+
+-# 右下の赤いカメラ
+=render "layouts/bottom-camera"

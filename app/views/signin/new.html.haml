@@ -1,0 +1,36 @@
+- content_for(:html_title) {'ログイン'}
+= render partial: 'signup/simple-header'
+.signin-container
+  .signin-top
+    .signin-top__signup
+      %p.signin-top__signup__text アカウントをお持ちでない方はこちら
+      = link_to '新規会員登録',registration_signup_index_path,class: 'submit-btn signin-top__signup--btn'
+    .signin-top__form
+      .signin-top__form__sns
+        = link_to root_path,class: 'submit-btn signin-top__form__sns__facebook' do
+          %i.fab.fa-facebook-square.signin-top__form--icon.signin-top__form--facebook
+          = 'Facebookでログイン'
+        = link_to root_path,class: 'submit-btn signin-top__form__sns__google' do
+          %i.fab.fa-google.signin-top__form--icon.signin-top__form--google
+          = 'Googleでログイン'
+      .signin-top__form__normal
+        = form_for @signin,url: signin_index_path,method: :post do |f|
+          = f.email_field :email, placeholder: 'メールアドレス',class: 'signin-top__form__normal--email default-input'
+          - if judge_blank(@signin,:email)
+            .input-error メールアドレスを入力してください
+          - elsif judge_format(@signin,:email)
+            .input-error フォーマットが不適切です
+          = f.password_field :password, placeholder: 'パスワード',class: 'signin-top__form__normal--password default-input'
+          - if judge_blank(@signin,:password)
+            .input-error パスワードを入力してください
+          - if judge_length_short(@signin,:password,7) || judge_length_long(@signin,:password,128)
+            .input-error パスワードは7文字以上128文字以下で入力してください
+          .signup-form-container.recaptcha-container
+            - if judge_recaptcha(@signin)
+              .recaptcha-error-border
+            = recaptcha_tags
+            - if judge_recaptcha(@signin)
+              .input-error 選択してください
+          =f.submit "ログイン",class: "submit-btn submit-btn-red"
+        = link_to 'パスワードをお忘れの方', '',class: 'signin-top__form__normal--link default-link-text'
+= render partial: 'signup/simple-footer'

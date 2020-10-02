@@ -1,0 +1,24 @@
+= render "layouts/main-header"
+-content_for :current_page do
+  %span.current_page
+    = link_to "users_show_path" do
+      マイページ
+    %i.fa.fa-chevron-right
+    %span.current_page__now
+      ログアウト
+= render "layouts/breadcrumbs"
+.user-mypage-wrapper
+  .user-mypage-wrapper__main
+    .user-mypage-wrapper__main__box
+      .user-mypage-wrapper__main__box__title
+        %form.user-mypage-wrapper__main__box__title__inner
+          .user-mypage-wrapper__main__box__title__inner__content
+            = link_to 'ログアウト',current_user_destroy_path,method: :delete,class: "user-mypage-wrapper__main__box__title__inner__content__btn submit-btn submit-btn-red"
+  = render "layouts/user-navi"  
+
+-# footer
+= render "layouts/footer-advertisement"
+= render "layouts/footer-black"
+
+-# 右下の赤いカメラ
+=render "layouts/bottom-camera"

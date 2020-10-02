@@ -1,0 +1,32 @@
+- content_for(:html_title) {'会員登録完了'}
+= render partial: 'signup-header5'
+.signup-container
+  %h2.signup-header 会員登録完了
+  .registration-form 
+    .signup-form-container.registration-form__first-container
+      %p.signup-form-container__agreement-text
+        ありがとうございます。
+      %p.signup-form-container__agreement-text
+        会員登録が完了しました。
+    = link_to root_path do
+      %input.submit-btn.submit-btn-red{type: 'submit',value: 'メルカリをはじめる'} 
+.signup-last-advertisement
+  .signup-last-advertisement__box
+    .signup-last-advertisement__box__left
+      .signup-last-advertisement__box__left__description
+        = '\ スマホでかんたんフリマアプリ /'
+      .signup-last-advertisement__box__left__reminder
+        今すぐ無料ダウンロード！
+      .signup-last-advertisement__box__left__logos
+        .signup-last-advertisement__box__left__logos__mercari
+          = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/mercari_icon-f75780e32e41e052c8aaa8b446331cd8.png",class: 'signup-last-advertisement__box__left__logos__mercari--image'
+        .signup-last-advertisement__box__left__logos__appstore
+          .signup-last-advertisement__box__left__logos__appstore__image
+            = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/app-store-a5c17948c6fd6d5b60b13d421cd60b35.svg",class: 'signup-last-advertisement__box__left__logos__appstore__image--image'
+        .signup-last-advertisement__box__left__logos__google
+          .signup-last-advertisement__box__left__logos__google__image
+            = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/google-play-495575abb895b405aa6336b2a4304958.svg",class: 'signup-last-advertisement__box__left__logos__google__image--image'
+    .signup-last-advertisement__box__image
+      = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/download_app_pc-a4418175e8be071827ac88d073f40e4a.png", size: "300x260"
+= render partial: 'simple-footer'
+

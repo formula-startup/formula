@@ -1,0 +1,96 @@
+= render partial: '/signup/simple-header'
+
+.main-container
+  %section.main-container__purchase-details
+    %h2.main-container__purchase-details__title
+      購入内容の確認
+    %section.main-container__purchase-details__item
+      .main-container__purchase-details__item__inner
+        .main-container__purchase-details__item__inner__product
+          %h3.main-container__purchase-details__item__inner__product__image
+            = image_tag @product.product_images.first.image_url, size: "64x64"
+          %p.main-container__purchase-details__item__inner__product__name
+            商品名
+            %br
+            = @product.title
+        %form.main-container__purchase-details__item__inner__purchase-details
+          %p.main-container__purchase-details__item__inner__purchase-details__price
+            = "¥ #{@product.price.to_s(:delimited)}"
+            %span.main-container__purchase-details__item__inner__purchase-details__price__shipping-fee
+              送料込み
+          %ul.main-container__purchase-details__item__inner__purchase-details__use-points
+            %li.main-container__purchase-details__item__inner__purchase-details__use-points__top
+              .main-container__purchase-details__item__inner__purchase-details__use-points__top__title
+                ポイントを使う
+                %i.fas.fa-chevron-down
+                %i.fas.fa-chevron-up
+              %ul.main-container__purchase-details__item__inner__purchase-details__use-points__top__list
+                %li.main-container__purchase-details__item__inner__purchase-details__use-points__top__list__points
+                  所持ポイント: P1,000
+                %li.main-container__purchase-details__item__inner__purchase-details__use-points__top__list__form-group
+                  .main-container__purchase-details__item__inner__purchase-details__use-points__top__list__form-group__not-use-point
+                    %label
+                      %input{type: "radio", name: "points"}
+                      ポイントを使わない
+                  .main-container__purchase-details__item__inner__purchase-details__use-points__top__list__form-group__use-all-points
+                    %label
+                      %input{type: "radio", name: "points"}
+                      すべてのポイントを使う
+                      %br
+                      P1000
+                  .main-container__purchase-details__item__inner__purchase-details__use-points__top__list__form-group__use-some-points
+                    %label
+                      %input{type: "radio", name: "points"}
+                      一部のポイントを使う
+                  %input{type: "text", placeholder:"使うポイントを入力", class:"main-container__purchase-details__item__inner__purchase-details__use-points__top__list__form-group__input-use-points"}
+          %ul.main-container__purchase-details__item__inner__purchase-details__buy-price
+            %li.main-container__purchase-details__item__inner__purchase-details__buy-price__box
+              .main-container__purchase-details__item__inner__purchase-details__buy-price__box__text
+                支払い金額
+              .main-container__purchase-details__item__inner__purchase-details__buy-price__box__amount
+                %span
+                  = "¥ #{@product.price.to_s(:delimited)}"
+          %p.main-container__purchase-details__item__inner__purchase-details__error-text
+            この商品はゆうゆうメルカリ便を利用しているため、アプリからのみ購入できます。
+          %ul.main-container__purchase-details__item__inner__purchase-details__purchase-button
+            %li.main-container__purchase-details__item__inner__purchase-details__purchase-button__box
+              = link_to "購入する", product_purchase_index_path(@product),method: :post,class: "submit-btn submit-btn-red"
+          %p.main-container__purchase-details__item__inner__purchase-details__attention
+            アプリをお持ちでない方は以下よりインストールしてご利用いただけます。
+          %br
+          %div
+            = link_to "https://itunes.apple.com/jp/app/id667861049?l=ja&mt=8" do
+              = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/app-store-a5c17948c6fd6d5b60b13d421cd60b35.svg", size:"64x18"
+            = link_to "https://play.google.com/store/apps/details?id=com.kouzoh.mercari&hl=ja" do
+              = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/google-play-495575abb895b405aa6336b2a4304958.svg", size:"64x18"
+    %section.main-container__purchase-details__user-info
+      .main-container__purchase-details__user-info__inner
+        %h3
+          配送先
+        %address.main-container__purchase-details__user-info__inner__address
+          = "〒#{current_user.profile.postal_code}"
+          %br
+          = @post_address
+          %br
+          = @post_name
+        = link_to "" do
+          %span
+            変更する
+          %i.fas.fa-chevron-right
+    %section.main-container__purchase-details__user-pay-info
+      .main-container__purchase-details__user-pay-info__inner
+        %h3
+          支払い方法
+        %p.main-container__purchase-details__user-pay-info__inner__text
+          %br
+          = "**** **** ****" + @customer_card.last4
+          %br
+          = @customer_card.exp_month.to_s + "/" + @customer_card.exp_year.to_s
+          %br
+          = @customer_card.brand
+        = link_to "" do
+          %span
+            変更する
+          %i.fas.fa-chevron-right
+          
+= render 'signup/simple-footer'

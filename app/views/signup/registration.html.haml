@@ -1,0 +1,115 @@
+- content_for(:html_title) {'会員情報入力'}
+= render partial: 'signup-header1'
+.signup-container
+  %h2.signup-header 会員情報入力
+  .registration-form
+    = form_for @user, url: registration_signup_index_path,method: :post do |f|
+      .signup-form-container.registration-form__first-container
+        .signup-form-container__title
+          = label :nickname, 'ニックネーム', class: 'signup-label'
+          %span.signup-form-container__span.span-need 必須
+        = f.text_field :nickname, placeholder: '例）メルカリ太郎', class: 'default-input'
+        - if judge_length_long(@user,:nickname,20)
+          .input-error 20文字以下で入力してください
+        - elsif judge_blank(@user,:nickname)
+          .input-error ニックネームを入力してください
+      .signup-form-container
+        .signup-form-container__title
+          = label :email, 'メールアドレス',class: 'signup-label'
+          %span.signup-form-container__span.span-need 必須
+        = f.text_field :email, placeholder: 'PC・携帯どちらでも可', class: 'default-input'
+        - if judge_blank(@user,:email)
+          .input-error メールアドレスを入力してください
+        - elsif judge_format(@user,:email)
+          .input-error フォーマットが不適切です
+      .signup-form-container
+        .signup-form-container__title
+          = label :password, 'パスワード',class: 'signup-label'
+          %span.signup-form-container__span.span-need 必須
+        = f.password_field :password,placeholder: '７文字以上', class: 'default-input'
+        - if judge_blank(@user,:password)
+          .input-error パスワードを入力してください
+        - if judge_length_short(@user,:password,7) || judge_length_long(@user,:password,128)
+          .input-error パスワードは7文字以上128文字以下で入力してください
+        - if judge_format(@user,:password)
+          .input-error 英字と数字両方を含むパスワードを設定してください
+      .signup-form-container
+        .signup-form-container__title
+          = label :password_confirmation, 'パスワード（確認）', class: 'signup-label'
+          %span.signup-form-container__span.span-need 必須
+        = f.password_field :password_confirmation, placeholder: '7文字以上', class: 'default-input'
+        - if judge_blank(@user,:password_confirmation)
+          .input-error パスワード(確認)を入力してください
+        - if judge_password_match(@user,:password)
+          .input-error パスワードとパスワード (確認) が一致しません
+      .signup-form-container
+        = label :announce, '本人確認', class: 'signup-label'
+        %p.registration-form__message 安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
+      = fields_for @profile,url: registration_signup_index_path,method: :post do |o|
+        .signup-form-container
+          .signup-form-container__title
+            = label :name, 'お名前(全角)', class: 'signup-label'
+            %span.signup-form-container__span.span-need 必須
+          .signup-form-container__name
+            = o.text_field :family_name, placeholder: '例）山田', class: 'default-input default-input__half'
+            = o.text_field :personal_name, placeholder: '例）彩', class: 'default-input default-input__half'
+          - if judge_blank(@profile,:family_name)
+            .input-error 姓を入力してください
+          - if judge_length_long(@profile,:family_name,35)
+            .input-error 姓は35文字までです
+          - if judge_blank(@profile,:personal_name)
+            .input-error 名を入力してください
+          - if judge_length_long(@profile,:personal_name,35)
+            .input-error 名は35文字までです
+        .signup-form-container
+          .signup-form-container__title
+            = label :name, 'お名前カナ(全角)', class: 'signup-label'
+            %span.signup-form-container__span.span-need 必須
+          .signup-form-container__name
+            = o.text_field :family_name_kana, placeholder: '例）ヤマダ', class: 'default-input default-input__half'
+            = o.text_field :personal_name_kana, placeholder: '例）アヤ', class: 'default-input default-input__half'
+          - if judge_blank(@profile,:family_name_kana)
+            .input-error 姓カナを入力してください
+          - if judge_length_long(@profile,:family_name_kana,35)
+            .input-error 姓カナは35文字までです
+          - if judge_blank(@profile,:personal_name_kana)
+            .input-error 名カナを入力してください
+          - if judge_length_long(@profile,:personal_name_kana,35)
+            .input-error 名カナは35文字までです
+        .signup-form-container
+          .signup-form-container__title
+            = label :name, '生年月日', class: 'signup-label'
+            %span.signup-form-container__span.span-need 必須
+          .signup-form-container__birthday
+            .select-wrap
+              = o.collection_select :birthyear, BirthYear.all,:year,:year,{include_blank: '--'},{class: 'default-select select-year'}
+              %i.select-arrow.fas.fa-chevron-down
+            %span.signup-form-container__birthday--span 年
+            .select-wrap
+              = o.collection_select :birthmonth, Month.all,:value,:value,{include_blank: '--'},{class: 'default-select select-month'}
+              %i.select-arrow.fas.fa-chevron-down
+            %span.signup-form-container__birthday--span 月
+            .select-wrap
+              = o.select :birthday,(1..31).to_a,{include_blank: '--'},class: 'default-select select-day'
+              %i.select-arrow.fas.fa-chevron-down
+            %span.signup-form-container__birthday--span 日
+          - if judge_date_present(@profile,:birthyear,:birthmonth,:birthday)
+            .input-error 生年月日を入力してください
+        %p.form-information-text ※本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。
+        .signup-form-container.recaptcha-container
+          - if judge_recaptcha(@profile)
+            .recaptcha-error-border
+          = recaptcha_tags
+          - if judge_recaptcha(@profile)
+            .input-error 選択してください
+        .signup-form-container
+          %p.signup-form-container__agreement-text
+            「次へ進む」のボタンを押すことにより、
+            = link_to '利用規約','',{class: "default-link-text link-space-reset"} 
+            に同意したものとみなします
+      = f.submit '次へ進む',class: 'submit-btn submit-btn-red'
+      .registration-form__link-text
+        %p.registration-form__link-text--text.default-link-text
+          = link_to '本人情報の登録について','',{class: "default-link-text"} 
+          %i.fas.fa-chevron-right.link-space-reset
+= render partial: 'simple-footer'

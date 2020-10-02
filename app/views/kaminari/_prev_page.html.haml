@@ -1,0 +1,5 @@
+%span.prev
+  - unless current_page.first?
+    = link_to  url, rel: 'prev', remote: remote do
+      %i.fas.fa-chevron-left.pagenate-icon
+

@@ -1,0 +1,50 @@
+- content_for(:html_title) {'支払い方法'}
+= render partial: 'signup-header4'
+.signup-container
+  %h2.signup-header 支払い方法
+  .registration-form 
+    .signup-form-container.registration-form__first-container
+      .signup-form-container__title
+        = label :card_number, 'カード番号', class: 'signup-label'
+        %span.signup-form-container__span.span-need 必須
+      %input.default-input.number{placeholder: '半角数字のみ',name: 'number'}
+    .registration-form__card-images
+      = image_tag 'https://cdn.svgporn.com/logos/visa.svg', class: 'registration-form__card-images--card-image'
+      = image_tag 'https://cdn.svgporn.com/logos/mastercard.svg', class: 'registration-form__card-images--card-image'
+      = image_tag 'https://i1.wp.com/tokugawax.jp/wp-content/uploads/2017/02/%E3%82%AF%E3%83%AC%E3%83%87%E3%82%A3%E3%82%BB%E3%82%BE%E3%83%B3%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E6%8A%95%E8%B3%87.jpg?zoom=2&resize=660%2C400&ssl=1', class: 'registration-form__card-images--card-image'
+      = image_tag 'https://cdn.svgporn.com/logos/jcb.svg', class: 'registration-form__card-images--card-image'
+      = image_tag 'https://cdn.svgporn.com/logos/amex.svg', class: 'registration-form__card-images--card-image'
+      = image_tag 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEr-t0KoiZhqd2KuwZC89xMRwWTlpYA6qGRYeC7kOKxfwftmJFZA', class: 'registration-form__card-images--card-image'
+      = image_tag 'https://cdn.svgporn.com/logos/discover.svg', class: 'registration-form__card-images--card-image'
+    #number-error
+    .signup-form-container
+      .signup-form-container__title
+        = label :name, '有効期限', class: 'signup-label'
+        %span.signup-form-container__span.span-need 必須
+      .signup-form-container__birthday
+        .select-wrap.select-wrap__half
+          %select.default-select.exp_month#exp_month{name: 'exp_month'}
+            - Month.all.each do |month|
+              %option{value: month.value} 
+                = month.show
+          %i.select-arrow.fas.fa-chevron-down
+        %span.signup-form-container__card 月
+        .select-wrap.select-wrap__half
+          %select.default-select.exp_year#exp_year{name: 'exp_year'}
+            - CreditYear.all.each do |year|
+              %option{value: year.value}
+                = year.show
+          %i.select-arrow.fas.fa-chevron-down
+        %span.signup-form-container__card 年
+    .signup-form-container
+      .signup-form-container__title
+        = label :cvc, 'セキュリティコード', class: 'signup-label'
+        %span.signup-form-container__span.span-need 必須
+      %input.default-input.cvc{placeholder: 'カード背面4桁もしくは3桁の番号',name: 'cvc'}
+    #cvc-error
+    .registration-form__link-cvc
+      %p.registration-form__link-text--text.default-link-text 
+        %i.fas.fa-question-circle.link-space-reset
+        = link_to 'カード背面の番号とは？','',{class: "default-link-text"}
+    %input.submit-btn.submit-btn-red#token_submit{type: 'submit',value: '次へ進む'} 
+= render partial: 'simple-footer'

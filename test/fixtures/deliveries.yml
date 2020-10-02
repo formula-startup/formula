@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fee_person: 
+  from_area: MyString
+  day_id: 1
+  how_id: 1
+  products_id: one
+
+two:
+  fee_person: 
+  from_area: MyString
+  day_id: 1
+  how_id: 1
+  products_id: two

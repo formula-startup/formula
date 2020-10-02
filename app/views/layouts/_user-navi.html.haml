@@ -1,0 +1,101 @@
+.user-mypage-wrapper__navi
+  .user-mypage-wrapper__navi__menu
+    %ul
+      %li
+        = link_to "/users/#{current_user.id}" ,class:"link" do
+          マイページ
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_notice_path", class:"link" do
+          お知らせ
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage-tasks_path", class:"link" do
+          やることリスト
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage-good-index_path", class:"link" do
+          いいね！一覧
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to new_product_path, class:"link" do
+          出品する
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_sell_index",class:"link" do
+          出品した商品-出品中
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_sell_trading",class:"link" do
+          出品した商品-取引中
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_sell_sold",class:"link" do
+          出品した商品-売却済み
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_buy_trading",class:"link" do
+          購入した商品-取引中
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_buy_past",class:"link" do
+          購入した商品-過去の取引
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_news_index",class:"link" do
+          ニュース一覧
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_reliable",class:"link" do
+          評価一覧
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_guide",class:"link" do
+          ガイド
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "mypage_contact",class:"link" do
+          お問い合わせ
+          %i.fas.fa-chevron-right.menu-icon
+  .user-mypage-wrapper__navi__merpay
+    %h3 メルペイ
+    %ul
+      %li
+        = link_to "merpay_apply",class:"link" do
+          売上・振込申請
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "merpay_points",class:"link" do
+          ポイント
+          %i.fas.fa-chevron-right.menu-icon
+  .user-mypage-wrapper__navi__config
+    %h3 設定
+    %ul 
+      %li
+        = link_to edit_profile_users_path,class:"link" do
+          プロフィール
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "config_address",class:"link" do
+          発送元・お届け先住所変更
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to credit_register_users_path,class:"link" do
+          支払い方法
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "config_mail",class:"link" do
+          メール/パスワード
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to edit_users_path ,class:"link" do
+          本人情報
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to "config_telephone",class:"link" do
+          電話番号の確認
+          %i.fas.fa-chevron-right.menu-icon
+      %li
+        = link_to logout_users_path,class:"link" do
+          ログアウト          
+          %i.fas.fa-chevron-right.menu-icon

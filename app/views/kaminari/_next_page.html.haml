@@ -1,0 +1,5 @@
+%span.next
+  - unless current_page.last?
+    = link_to url, rel: 'next', remote: remote do
+      %i.fas.fa-chevron-right.pagenate-icon
+

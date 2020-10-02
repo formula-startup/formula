@@ -1,0 +1,78 @@
+@import "users";
+
+.user-mypage-wrapper__main__profile-edit{
+  width: 700px;
+  @extend %centering;
+  flex-direction: column;
+  background-color: $normal-white;
+  &__title{
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    padding: 8px 24px;
+    font-size: 24px;
+    font-weight: bold;
+    @extend %centering;
+    border-bottom: 1px $normal-gray solid;
+  }
+  &__content{
+    width: 100%;
+    @extend %centering;
+    flex-direction: column;
+    border-bottom: 1px solid $normal-gray;
+    &__icon{
+      background: url("https://www.mercari.com/jp/assets/img/mypage/user-bg.jpg?45085161");
+      background-repeat: no-repeat;
+      background-size: cover;
+      text-align: center;
+      font-size: 0;
+      width: 100%;
+      padding: 72px 0px 24px;
+      &__img{
+        display: inline-block;
+        overflow: hidden;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+      &__input-default{
+        height: 48px;
+        padding: 10px 16px 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background: #fff;
+        line-height: 1.5;
+        font-size: 16px;
+        width: 220px;
+        vertical-align: middle;
+        margin: 0 0 0 8px;
+        box-sizing: border-box;
+      }
+    }
+    &__index{
+      font-weight: bold;
+      font-size: 16px;
+      padding: 40px 16px;
+      width: 100%;
+      box-sizing: border-box;
+      &__text{
+        min-height: 216px;
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        border: 1px solid #ccc;
+        background: #fff;
+        font-size: 16px;
+        line-height: 1.5;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      &__btn{
+        box-sizing: border-box;
+        height: 50px;
+        border: 1px solid transparent;
+      }
+    }
+  }
+}

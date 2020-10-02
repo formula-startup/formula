@@ -1,0 +1,73 @@
+= render "layouts/main-header"
+-content_for :current_page do
+  %span.current_page
+    = link_to users_path do
+      マイページ
+    %i.fa.fa-chevron-right
+    %span.current_page__now
+      本人情報の登録
+= render "layouts/breadcrumbs"
+.user-mypage-wrapper
+  .user-mypage-wrapper__main
+    .user-mypage-wrapper__main__credit
+      .user-mypage-wrapper__main__credit__title
+        本人情報の登録
+      .user-mypage-wrapper__main__box__contents
+        .user-mypage-wrapper__main__box__contents__notice
+          お客さまの本人情報をご登録ください。
+          %br
+          登録されたお名前・生年月日を変更する場合、本人確認書類の提出が必要になります。
+          = link_to "" do
+            本人確認書類のアップロードについて
+            %i.fa.fa-chevron-right
+        .signup-form-container.registration-form__first-container.mypage-form-container
+          .signup-form-container__title
+            = label :name, 'お名前', class: 'signup-label'
+          = current_user.profile.post_family_name + current_user.profile.post_personal_name
+        .signup-form-container.mypage-form-container
+          .signup-form-container__title
+            = label :name, 'お名前カナ', class: 'signup-label'
+          = current_user.profile.post_family_name_kana + current_user.profile.post_personal_name_kana
+        .signup-form-container.mypage-form-container
+          .signup-form-container__title
+            = label :name, '生年月日', class: 'signup-label'
+          = current_user.profile.birthyear.to_s + "/" + current_user.profile.birthmonth.to_s + "/" + current_user.profile.birthday.to_s
+        .signup-form-container.mypage-form-container
+          .signup-form-container__title
+            = label :postal_code, '郵便番号', class: 'signup-label'
+            %span.signup-form-container__span.span-optional 任意
+          = text_field :user, :postal_code, placeholder: '例）123-4567', class: 'default-input'
+        .signup-form-container.mypage-form-container
+          .signup-form-container__title
+            = label :postal_code, '都道府県', class: 'signup-label'
+            %span.signup-form-container__span.span-optional 任意
+          .select-wrap.select-wrap__full
+            = select :user,:prefecture,Prefecture.pluck(:name).unshift('--'),{},{class: 'default-select default-select__full'}
+            %i.select-arrow.fas.fa-chevron-down
+        .signup-form-container.mypage-form-container
+          .signup-form-container__title
+            = label :city, '市区町村', class: 'signup-label'
+            %span.signup-form-container__span.span-optional 任意
+          = text_field :user, :city, placeholder: '例）横浜市緑区', class: 'default-input'
+        .signup-form-container.mypage-form-container
+          .signup-form-container__title
+            = label :address, '番地', class: 'signup-label'
+            %span.signup-form-container__span.span-optional 任意
+          = text_field :user, :address, placeholder: '例）青山1-1-1', class: 'default-input'
+        .signup-form-container.mypage-form-container
+          .signup-form-container__title
+            = label :building, '建物名', class: 'signup-label'
+            %span.signup-form-container__span.span-optional 任意
+          = text_field :user, :building, placeholder: '例）柳ビル103', class: 'default-input'
+        %input.submit-btn.submit-btn-red{type: 'submit',value: '登録する'}
+        .content-end
+          = link_to "" do
+            本人情報の登録について
+            %i.fa.fa-chevron-right
+  = render "layouts/user-navi"
+-# footer
+= render "layouts/footer-advertisement"
+= render "layouts/footer-black"
+
+-# 右下の赤いカメラ
+=render "layouts/bottom-camera"

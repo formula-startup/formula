@@ -1,0 +1,195 @@
+// Place all the styles related to the search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "./variable.scss";
+@import "font-awesome";
+
+.search-container{
+  display: flex;
+  justify-content: space-between;
+  width: 1020px;
+  margin: 0 auto;
+  padding: 40px 0;
+  font-size: 14px;
+
+  &__left{
+    width: 280px;
+    margin-right: 40px;
+
+    &__sort-select{
+      width: 100%;
+
+      &--select{
+        background-color: $normal-white;
+      }
+    }
+
+    &__search-contents{
+      background-color: $normal-white;
+      color: $default-font-black;
+      margin-top: 40px;
+      padding: 16px;
+
+      &__title{
+        font-size: 16px;
+        font-weight: bold;
+      }
+      &__price{
+
+        &__input-container{
+          display: flex;
+          justify-content: space-between;
+        }
+
+        &__input-container span{
+          padding-top: 10px;
+        }
+
+        &--half-input{
+          width: 45%;
+        }
+      }
+
+      &__freshness{
+
+        &__check{
+          display: flex;
+          flex-wrap: wrap;
+        }
+      }
+      &__btn-container{
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+  &__right{
+    width: calc(100% - 280px);
+
+    &__title{
+      display: flex;
+      justify-content: flex-start;
+      padding-left: 15px;
+      &__word{
+        font-weight: bold;
+        font-size: 22px;
+        display: inline-block;
+
+        &__after{
+          padding-top: 10px;
+          display: inline-block;
+        }
+      }
+    }
+
+    &__products{
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+
+      &__product{
+        width: 23%;
+        margin-top: 10px;
+        margin-left: 10px;
+        box-shadow: none;
+      }
+    }
+  }
+}
+.check_box{
+  display: inline-block;
+  width: 35%;
+  margin-top: 16px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.check_box:before{
+  content:		'';
+	width:			20px;
+	height:			20px;		
+	display:		inline-block;
+	position:		absolute;
+  left:			0;
+  top: 5px;
+	background-color:	#fff;
+  border-radius:	3px;
+  border: solid 1px #888;
+}
+
+input[type=checkbox]:checked {
+	content:		'\2713';
+	font-size:		20px;	
+	color:			#fff;
+  background-color:	$link-text-blue;
+}
+
+.search-title{
+  margin-top: 40px;
+
+  &__text{
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+.search-icon{
+  margin-right: 4px;
+  color: #888;
+  font-size: 16px;
+}
+
+.search-input{
+  margin-top: 8px;
+}
+
+input[type=checkbox]{
+  display: none;
+}
+
+.page,.next,.last,.prev, .first{
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  background: #fff;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 42px;
+  text-align: center;
+
+  a{
+    text-decoration: none;
+    color: $default-font-black;
+  }
+}
+.current_paginate{
+  color: #fff;
+  background: #ea352d;
+}
+.pagination{
+  text-align: center;
+  margin-top: 40px;
+  width: 97%;
+
+  &__left{
+    float: left;
+    display: inline-block;
+  }
+
+  &__center{
+    display: inline-block;
+  }
+
+  &__right{
+    float: right;
+    display: inline-block;
+  }
+}
+
+.pagenate-icon{
+  font-size: 20px;
+  display: inline-block;
+  margin-top: 12px;
+}

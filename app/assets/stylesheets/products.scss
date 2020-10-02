@@ -1,0 +1,363 @@
+@import "variable";
+@import "font-awesome";
+
+// top pageのindex
+.main__products{
+  width: 100vw;
+  padding:0 0 100px;
+  @extend %centering;
+  flex-direction: column;
+  @extend %global-font;
+  &__product{
+    margin-top: 42px;
+    box-sizing: border-box;
+    width: 1020px;
+    height: 573px;
+
+    &__header{
+      box-sizing: border-box;
+      width: 100%;
+      height: 33px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 24px;
+      margin-bottom: 16px;
+      font-weight: bold;
+      &__next{
+        font-size: 14px;
+        font-weight: 600;
+        padding:5px 0px 0px 5px;
+        align-self: flex-end;
+        a{
+          color: #0095EE;
+          text-decoration: none;
+          i{
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    // スクロールフェードイン
+    .effect-fade{
+      opacity: 0;
+      transform: translate(0, 0);
+      transition: all 750ms;
+    }
+    .effect-fade.effect-scroll{
+      opacity:1;
+      transform: translate(0,0);
+    }
+    &__contents{
+      box-sizing: border-box;
+      width: 100%;
+      height: 524px;
+      display: flex;
+      justify-content: space-between;
+      align-content: space-between;
+      flex-wrap: wrap;
+      &__content{
+        display: block;
+        box-sizing: border-box;
+        width: calc((100% / 5 ) - 2%);
+        height: 252px;
+        box-shadow: 1px 3px 3px rgba(0,0,0,0.2);
+        border: 1px solid transparent;
+        & a{
+          text-decoration: none;
+          color: $default-font-black;
+        }
+        &:hover{
+          box-sizing: border-box;
+          border: 1px solid #b3d4fc;
+          z-index: 2
+        }
+        &__image{
+          width: 100%;
+          height: 188px;
+          position: relative;
+          img{
+            width: 100%;
+            height: 100%;
+          }
+          &__price{
+            position: absolute;
+            left:0%;
+            top: 70%;
+            height: 28px;
+            line-height: 28px;
+            max-width: 80%;
+            overflow: hidden;
+            font-size: 17px;
+            padding: 0 12px;
+            color: $normal-white;
+            background-color: rgba(0,0,0,0.4);
+            border-top-right-radius: 14px;
+            border-bottom-right-radius: 14px;
+          }
+        }  
+        &__name{
+          background-color: $normal-white;
+          height: calc(252px - 188px);
+          text-overflow: fade(10px, 10);
+          padding: 12px;
+          box-sizing: border-box;
+          width:100%;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
+
+// レスポンシブ対応
+// 中画面（タブレット等）
+@media screen and (min-width:768px) and (max-width:1067px){
+  .main__products__product{
+    width: 700px;
+    height: 445px;
+    &__contents{
+      height: 396px;
+      &__content{
+        height: 188px;
+        &__image{
+          height: 124px;
+          img{
+            height: 124px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 商品出品ページ
+.field_with_errors{
+  width: 100%;
+}
+.sell-container{
+  background-color: #f5f5f5;
+  .simple-header{
+    background-color: #f5f5f5;
+  }
+  .sell-input{
+    width: 100%;
+  }
+  .signup-container{
+    .sell-upload-form{
+      @extend %global-font;
+      color: #333333;
+      .sell-container-all-padding{
+        padding: 40px;
+      }
+      .sell-container-side-padding{
+        padding: 0 40px 40px;
+      }
+      &__image{
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 303px;
+        #preview{
+          box-sizing: border-box;
+          width: 620px;
+          min-height: 162px;
+          max-height: 825.87px;
+          overflow: hidden;
+          background-color: #f5f5f5;
+          margin-top: 16px;
+          flex-wrap: wrap;
+          border: 1px dashed #ccc;
+          font-size: 14px;
+          font-family: monospace;
+        }
+        &--images-container{
+          margin-top: 60px;
+          text-align: center;
+          width: 100%;
+        }
+      }
+      .sell-upload-label{
+        font-weight: bold;
+        display: inline-block;
+        height: 16px;
+      }
+      .container-border-top{
+        border-top: 1px solid #eee;
+      }
+      .sell-container-content{
+        margin-top: 8px;
+        font-size: 14px;
+      }
+      .sell-input-area{
+        width: 620px;
+        height: 142px;
+      }
+      .flex{
+        display: flex;
+      }
+      .sell-container-left{
+        box-sizing: border-box;
+        width: 220px;
+        height: 95px;
+        font-size: 14px;
+        color: #888888;
+        font-weight: bold;
+        span{
+          font-weight: 550;
+        }
+        a{
+          letter-spacing: -0.5px;
+          text-decoration: none;
+          color: $link-text-blue;
+          line-height: inherit;
+          &:hover{
+            opacity: 0.7;
+            text-decoration: underline;
+          }
+        }
+      }
+      .sell-container-right{
+        display: inline-block;
+        box-sizing: border-box;
+        width: 400px;
+        &__price-wrapper{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 14px;
+          &__input{
+            display: flex;
+            align-items: center;
+          }
+          .field_with_errors{
+            display: inline;
+            padding-bottom: 20px;
+          }
+          input{
+            margin-left: 8px;
+            width: 160px;
+          }
+        }
+        &__price-fee{
+          border-top: 0.5px solid #ccc;
+          margin-top: 24px;
+          height: 63px;
+          display: flex;
+          justify-content: space-between;
+          align-items:center;
+          font-size: 14px;
+          border-bottom: 0.5px solid #ccc;
+        }
+        &__price-benefit{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 40px;
+          h2{
+            margin-top: 1rem;
+            font-weight: bold;
+          }
+          #price_benefit{
+            font-size: 32px;
+          }
+        }
+        .margin-2rem{
+          margin-top: 2rem;
+        }
+        .select-wrap{
+          margin-top: 8px;
+          display: flex;
+          justify-content: space-between;
+          width: 400px;
+          &__sell-select-box{
+            padding: 0 16px;
+          }
+        }
+      }
+      .sell-container-description{
+        font-size: 14px;
+        margin-bottom: 20px;
+        a{
+          letter-spacing: -0.5px;
+          text-decoration: none;
+          color: $link-text-blue;
+          line-height: inherit;
+          &:hover{
+            opacity: 0.7;
+            text-decoration: underline;
+          }
+        }
+      }
+      .sell-container-submit{
+        @extend %centering;
+        margin-bottom: -40px;
+        &__btn{
+          width: 620px;
+          &:hover{
+            cursor: pointer;
+          }
+        }
+      }
+      .sell-container-back{
+        @extend %centering;
+        margin-bottom: -40px;
+        &__btn{
+          width: 279px;
+        }
+      }
+      .simple-footer{
+        @extend %centering;
+        position:relative;
+      }
+    }
+  }
+}
+#preview{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.product-image{
+  width: 20%;
+  background-color: $normal-white;
+  &__option{
+    display: flex;
+    color: $link-text-blue;
+    justify-content: space-between;
+    padding: 10px 15px;
+  }
+  &__delete,&__edit{
+    cursor: pointer;
+  }
+  & img{
+    width: 123.59px;
+    height: 123.59px;
+    object-fit: cover;
+  }
+}
+
+// 商品状態のバッジ
+.badge{
+  position: absolute;
+  top: -20%;
+  left: -47%;
+  height: 40%;
+  width: 100%;
+  background-color: $normal-red;
+  transform:rotate(-45deg);
+  z-index: 50;
+  font-size: 24px;
+  font-family: sans-serif;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.sold{
+  background-color: $normal-red;
+  color: $normal-white;
+}
+.stop{
+  background-color: #888888;
+  color: $normal-white;
+  font-size:20px;
+}

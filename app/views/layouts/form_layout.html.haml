@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
+    %link{href: "https://use.fontawesome.com/releases/v5.0.6/css/all.css", rel: "stylesheet"}/
+    %title 
+      = content_for?(:html_title) ? yield(:html_title) : "FreemarketSample58a" 
+    %script{src: "https://js.pay.jp/", type: "text/javascript"}
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'load'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'load'
+  %body.simple-form
+    = yield

@@ -1,0 +1,122 @@
+= render "/layouts/main-header"
+.main
+  .search-container
+    .search-container__left
+      .select-wrap.select-wrap__full.search-container__left__sort-select
+        = select :search,:sort, {},{include_blank: '--'}, {class: 'default-select default-select__full search-container__left__sort-select--select'}
+        %i.select-arrow.fas.fa-chevron-down
+      .search-container__left__search-contents
+        .search-container__left__search-contents__title
+          詳細検索
+        .search-container__left__search-contents__keyword.search-title
+          .search-title__text
+            %i.fas.fa-plus.search-icon
+            キーワードを追加する
+          %input.default-input.search-input
+        .search-container__left__search-contents__category.search-title
+          .search-title__text
+            %i.fas.fa-list-ul.search-icon
+            カテゴリーを選択する
+          .select-wrap.select-wrap__full.search-container__left__sort-select
+            = select :search,:sort, {},{include_blank: '--'}, {class: 'default-select default-select__full search-input'}
+            %i.select-arrow.fas.fa-chevron-down
+          .select-wrap.select-wrap__full.search-container__left__sort-select
+            = select :search,:sort, {},{include_blank: '--'}, {class: 'default-select default-select__full search-input'}
+            %i.select-arrow.fas.fa-chevron-down
+        .search-container__left__search-contents__brand.search-title
+          .search-title__text
+            %i.fas.fa-tag.search-icon
+            ブランド名から探す
+          %input.default-input.search-input
+        .search-container__left__search-contents__size.search-title
+          .search-title__text
+            %i.fas.fa-expand.search-icon
+            サイズを選択する
+          .select-wrap.select-wrap__full.search-container__left__sort-select
+            = select :search,:sort, {},{include_blank: '--'}, {class: 'default-select default-select__full search-input'}
+            %i.select-arrow.fas.fa-chevron-down
+        .search-container__left__search-contents__price.search-title
+          .search-title__text
+            %i.fab.fa-bitcoin.search-icon
+            価格
+          .select-wrap.select-wrap__full.search-container__left__sort-select
+            = select :search,:sort, {},{include_blank: '--'}, {class: 'default-select default-select__full search-input'}
+            %i.select-arrow.fas.fa-chevron-down
+          .search-container__left__search-contents__price__input-container.search-input
+            %input.default-input.search-container__left__search-contents__price--half-input
+            %span ~
+            %input.default-input.search-container__left__search-contents__price--half-input
+        .search-container__left__search-contents__freshness.search-title
+          .search-title__text
+            %i.fas.fa-star.search-icon
+            商品の状態
+          .search-container__left__search-contents__freshness__check
+            %label.check_box
+              = check_box 'search','condition'
+              = "全て"
+            - ProductFreshness.all.each do |freshness|
+              %label.check_box
+                = check_box 'search','condition'
+                = freshness.status
+        .search-container__left__search-contents__deliver_person.search-title
+          .search-title__text
+            %i.fas.fa-truck.search-icon
+            配送料の負担
+          .search-container__left__search-contents__freshness__check
+            %label.check_box
+              = check_box 'deliver-person',"all"
+              = "全て"
+            %label.check_box
+              = check_box 'deliver-person',"all"
+              = "着払い(購入者負担)"
+            %label.check_box
+              = check_box 'deliver-person',"all"
+              = "送料込み(出品者負担)"
+        .search-container__left__search-contents__deliver_person.search-title
+          .search-title__text
+            %i.fas.fa-shopping-cart.search-icon
+            販売状況
+          .search-container__left__search-contents__freshness__check
+            %label.check_box
+              = check_box 'sell-status',"all"
+              = "全て"
+            %label.check_box
+              = check_box 'sell-status',"all"
+              = "販売中"
+            %label.check_box
+              = check_box 'sell-status',"all"
+              = "売り切れ"
+        .search-container__left__search-contents__btn-container.search-title
+          %input.submit-btn.submit-btn-gray.submit-btn-half{type: 'submit',value: 'クリア'} 
+          %input.submit-btn.submit-btn-red.submit-btn-half{type: 'submit',value: '完了'} 
+    .search-container__right
+      .search-container__right__title
+        - if @search_word == "新着商品"
+          .search-container__right__title__word
+            = @search_word
+        - else
+          .search-container__right__title__word
+            = @search_word
+          .search-container__right__title__word__after
+            　の検索結果
+      .search-container__right__products
+        - @products.each do |product|
+          .main__products__product__contents__content.search-container__right__products__product
+            = link_to "/products/#{product.id}" do
+              .main__products__product__contents__content__image
+                = image_tag product.product_images.find_by(product_id: product.id).image_url
+                .main__products__product__contents__content__image__price
+                  = "¥#{product.price}"
+              .main__products__product__contents__content__name
+                %p
+                = "#{product.title}"
+      = paginate @products
+-content_for :current_page do
+  %span.current_page__now
+    = @search_word
+= render "layouts/breadcrumbs"
+%footer
+  =render "layouts/footer-advertisement"
+  %nav
+  = render "layouts/footer-black"
+  = render "layouts/bottom-camera"

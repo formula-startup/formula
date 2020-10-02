@@ -1,0 +1,10 @@
+.breadcrumbs
+  .breadcrumbs__wrapper
+    .breadcrumbs__wrapper__content
+      = link_to root_path do
+        メルカリ
+      %ul
+        %li
+          %i.fa.fa-chevron-right
+          %span
+            = yield :current_page

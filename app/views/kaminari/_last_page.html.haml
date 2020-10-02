@@ -1,0 +1,4 @@
+%span.last
+  - unless current_page.last?
+    = link_to url, remote: remote do
+      %i.fas.fa-angle-double-right.pagenate-icon

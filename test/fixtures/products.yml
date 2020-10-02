@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  text: MyString
+  fresh_status: MyString
+  user_id: 1
+  sell-status_id: 1
+  category-index_id: one
+  size_id: 1
+
+two:
+  name: MyString
+  text: MyString
+  fresh_status: MyString
+  user_id: 1
+  sell-status_id: 1
+  category-index_id: two
+  size_id: 1

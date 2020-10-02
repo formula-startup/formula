@@ -1,0 +1,18 @@
+- content_for(:html_title) {'電話番号の確認'}
+= render partial: 'signup-header2'
+.signup-container
+  %h2.signup-header 電話番号の確認
+  .registration-form
+    = form_for @profile, url: sms_authentication_signup_index_path,method: :post do |f|
+      .signup-form-container.registration-form__first-container
+        .signup-form-container__title
+          = label :nickname, '携帯電話の番号', class: 'signup-label'
+        = f.text_field :tel, placeholder: '携帯電話の番号を入力', class: 'default-input'
+      %p.registration-form--text 本人確認のため、携帯電話のSMS(ショートメッセージサービス)を利用して認証を行います。
+      = f.submit 'SMSを送信する',{class: 'submit-btn submit-btn-red'}
+      %p.registration-form--text ※電話番号は本人確認や不正利用防止のために利用します。他のユーザーに公開されることはありません。
+      .registration-form__link-text
+        %p.registration-form__link-text--text.default-link-text
+          = link_to '電話番号の確認が必要な理由','',{class: 'default-link-text'}
+          %i.fas.fa-chevron-right.link-space-reset
+= render partial: 'simple-footer'

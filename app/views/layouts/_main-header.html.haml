@@ -1,0 +1,60 @@
+%header
+  .box
+    .box__top
+      .box__top__title
+        = link_to root_path do
+          = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/logo-acdd90ac4f472d5a6f7a330d33ab1225.svg", size: "134x36"
+      .box__top__search
+        = form_for @form, url: search_index_path,method: :get,html: {class: "box__top__search__form"} do |f|
+          = f.text_field :keyword,{placeholder: "何かお探しですか？", class: "box__top__search__form__input"}
+          = f.button type: "submit",class: "search-btn" do
+            %i.fas.fa-search
+
+    .box__lower
+      .box__lower__left
+        .box__lower__left__category
+          = link_to class: "" do
+            %i.fas.fa-list-ul
+            カテゴリーから探す
+          .box__lower__left__category__wrapper
+            %ul.category_box.category_index_box
+              - @categories.each do |category|
+                %li{class:"category_#{category.id} category_#{category.id}_red"}
+                  = category.name
+              %li
+                カテゴリ一覧
+            %ul.category_box.bigcategory_box
+              - @bigcategories.each do |bigcategory|
+                %li{class:"category_#{bigcategory.category_index_id} bigcategory_#{bigcategory.id} bigcategory_#{bigcategory.id}_gray"}
+                  = bigcategory.name
+            %ul.category_box.smallcategory_box
+              - @smallcategories.each do |smallcategory|
+                %li{class:"bigcategory_#{smallcategory.bigcategory_id}"}
+                  = smallcategory.name
+        .box__lower__left__brand
+          = link_to class: "" do
+            %i.fas.fa-tag
+            ブランドから探す
+      .box__lower__right
+        %ul.box__lower__right__list
+          - if user_signed_in?
+            %li.box__lower__right__list__notice
+              = link_to class: "" do
+                %i.far.fa-bell
+                お知らせ
+            %li.box__lower__right__list__todo
+              = link_to class: "" do
+                %i.fas.fa-check
+                やることリスト
+            %li.box__lower__right__list__mypage
+              = link_to user_path(current_user),class: "" do
+                = image_tag src="https://static.mercdn.net/images/member_photo_noimage_thumb.png", size: "134x36"
+                マイページ
+          - else
+            %li.box__lower__right__list__signup
+              = link_to signup_index_path,class: "submit-btn submit-btn-red header-registration-btn" do
+                新規会員登録
+            %li.box__lower__right__list__sigin
+              = link_to signin_index_path,class: "submit-btn header-registration-btn header-signin-btn" do
+                ログイン
+  

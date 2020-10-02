@@ -1,0 +1,531 @@
+@import "variable.scss";
+// 背景画像（グレーのmercariロゴ、中身がなにもない時に使用）
+.nothing_image{
+  background: url(https://www.mercari.com/jp/assets/img/common/common/logo-gray-icon.svg?45085161) 0 0 no-repeat; 
+  background-position: center 40px;
+  background-size: 78px 85px;
+  text-align: center;
+  padding:160px 0 60px; 
+}
+
+// user show, mypage 
+// mypage main contents
+.user-mypage-wrapper{
+  @extend %global-font;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width:100vw;
+  background-color: $global-back-color;
+  padding-bottom: 40px;
+  padding-top: 40px;
+  &__main{
+    width:700px;
+    float:right;
+    &__profile{
+      &__container{
+        box-sizing: border-box;      
+        background: url( https://www.mercari.com/jp/assets/img/mypage/user-bg.jpg?45085161 );
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        height:200px;
+        flex-direction: column;
+        @extend %centering;
+        &__image{
+          width:60px;
+          height:60px;
+          img{
+            border-radius: 50%;
+          }
+        }
+        &__content{
+          h2{
+            font-weight: bold;
+            margin-top: 8px;
+          }
+        }
+        &__status{
+          display: flex;
+          margin-top: 8px;
+          &__content{
+            display: flex;
+            &__number{
+              margin-left: 8px;
+            }
+            &__name{
+              &__products{
+                margin-left: 16px;
+              }
+            }
+          }
+        }
+      }
+      &__contents{
+        width: 100%;
+        display: flex;
+        /*タブ切り替え全体のスタイル*/
+        .tabs {
+          margin-top: 50px;
+          background-color: $normal-white;
+          width: 100%;
+          margin: 0 auto;}
+        /*タブのスタイル*/
+        .tab_item {
+          width: calc(100%/2);
+          height: 72px;
+          background-color: $normal-gray;
+          line-height: 72px;
+          font-size: 16px;
+          text-align: center;
+          color: #565656;
+          display: block;
+          float: left;
+          text-align: center;
+          font-weight: bold;
+          transition: all 0.2s ease;
+          &:hover {
+            opacity: 0.75;
+          }
+        }
+        /*ラジオボタンを全て消す*/
+        input[name="tab_item"] {
+          display: none;
+        }
+        /*タブ切り替えの中身のスタイル*/
+        .tab_content {
+          display: none;
+          clear: both;
+          align-content: space-between;
+          .tab_content_description{
+            &__content{
+              box-sizing: border-box;
+              min-height:80px;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              padding:16px;
+              border-bottom: $normal-gray solid 1px;
+              color: #333;
+              &:hover {
+                background-color: $hover-gray;
+              }    
+              &__image{
+                height: 100%;
+                width: 60px;
+                @extend %centering;
+              }
+              &__body{
+                width:100%;
+                margin:0 40px 0 8px;
+                &__time{
+                  color: #888;
+                }
+              }
+              &__back{
+                box-sizing: border-box;
+                width: 100%;
+                height: 88px;
+                padding: 16px;
+                @extend %centering;
+                &__message{
+                  background-color: $normal-gray;  
+                  width: 100%;
+                  height: 100%;
+                  @extend %centering;
+                  &:hover{
+                    background-color: $global-back-color;
+                  }
+                }
+              }
+            }
+            &__task{
+              box-sizing: border-box;
+              padding:160px 0 60px; 
+              flex-direction: column;
+              color: rgb(174, 174, 174);
+              @extend %centering;
+            }
+          }
+        }
+      
+        /*選択されているタブのコンテンツのみを表示*/
+        #notice:checked ~ #notice_content,
+        #task:checked ~ #task_content{
+          display: block;
+        }
+        /*選択されているタブのスタイルを変える*/
+        .tabs input:checked + .tab_item {
+          background-color: white;
+          border-top: 2px solid red;
+          box-sizing: border-box;
+        }
+      }
+    }
+    // 商品関連
+    &__products{
+      margin-top: 40px;
+      width:700px;
+      background-color: white;
+      /*タブ切り替え全体のスタイル*/
+      &__title{
+        padding:0 16px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        h2{
+          font-weight: bold;
+        }
+      }
+      .tabs2 {
+        margin-top: 50px;
+        background-color: $normal-white;
+        width: 100%;
+        margin: 0 auto;
+      }
+    /*タブのスタイル*/
+      .tab_item2 {
+        width: calc(100%/2);
+        height: 72px;
+        background-color: $normal-gray;
+        line-height: 72px;
+        font-size: 16px;
+        text-align: center;
+        color: #565656;
+        display: block;
+        float: left;
+        text-align: center;
+        font-weight: bold;
+        transition: all 0.2s ease;
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+  
+      /*ラジオボタンを全て消す*/
+      input[name="tab_item2"] {
+        display: none;
+      }
+  
+      /*タブ切り替えの中身のスタイル*/
+      .tab_content {
+        box-sizing: border-box;
+        display: none;
+        clear: both;
+        align-content: space-between;
+        .tab_content_description{
+          box-sizing: border-box;
+          padding:160px 0 60px; 
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          color: rgb(174, 174, 174);
+        }
+      }
+  
+      /*選択されているタブのコンテンツのみを表示*/
+      #trading:checked ~ #trading_content,
+      #traded:checked  ~ #traded_content {
+        display: block;
+      }
+  
+      /*選択されているタブのスタイルを変える*/
+      .tabs2 input:checked + .tab_item2 {
+        background-color: white;
+        border-top: 2px solid red;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  // メニュー
+  &__navi{
+    width:280px;
+    margin-right: 40px;
+    h3 {
+      font-weight: bold;
+      background-color: $global-back-color;
+    }
+    li{
+      a{
+        box-sizing: border-box;
+        width: 100%;
+        height:48px;
+        padding:16px;
+        border: $global-back-color solid 1px;
+        line-height: 16px;
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+        text-decoration: none;
+        color: #333;
+        &:hover{
+          background-color: $hover-gray;
+        }
+          i{
+          color: #ccc;
+        }
+      }
+      &:hover{
+        .menu-icon{
+          // 使用するアニメーションの名前（@keyframesの名前）を指定
+          animation-name: moveRight;
+          // アニメーションの再生時間を指定
+          animation-duration:150ms;
+          // アニメーションの速度を指定
+          animation-timing-function: ease;
+          animation-fill-mode: forwards;
+        }
+        @keyframes moveRight{
+          0%{
+            color: #ccc;
+            transform: translate3d(0px, 0px, 0px);
+          }
+          100%{
+            color: black;
+            transform: translate3d(3px, 0px, 0px);
+          }
+        }
+      }
+    }
+    .active{
+      background-color: $normal-gray;
+    }
+    &__merpay{
+      margin-top: 40px;
+    }
+    &__config{
+      margin-top: 40px;
+    }  
+  }
+}
+
+// レスポンシブ対応
+// 小画面（スマホ等）
+@media screen and (max-width:767px){
+  .user-mypage-wrapper{
+    margin: 0;
+    &__main{
+      width:100vw;
+      &__profile{
+        &__container{
+          width: 100vw;
+        }
+      }
+      &__products{
+        width: 100vw;
+      }
+    }
+    &__navi{
+      width: 100vw;
+      margin: 40px 0 0 ;
+      &__menu{
+        width: 100vw;
+      }
+      h3{
+        margin:40px 4% 0;
+      }
+      &__merpay{
+        widows: 100vw;
+      }
+      &__config{
+        widows: 100vw;
+      }
+    }
+  }
+}
+
+// 中画面（タブレット等）
+@media screen and (min-width:768px) and (max-width:1067px){
+  .user-mypage-wrapper__navi{
+    width:700px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 40px auto 0;
+  }
+}
+
+// クレジットカード登録画面
+.user-mypage-wrapper__main__credit{
+  width: 100%;
+  @extend %centering;
+  flex-direction: column;
+  background-color: $normal-white;
+  &__title{
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    padding: 8px 24px;
+    font-size: 24px;
+    font-weight: bold;
+    @extend %centering;
+    border-bottom: 1px $normal-gray solid;
+  }
+  &__content{
+    width: 572px;
+    padding: 64px;
+    @extend %centering;
+    flex-direction: column;
+    border-bottom: 1px solid $normal-gray;
+    &__index{
+      width: 320px;
+      height: 16px;
+      display: flex;
+      justify-content: flex-start;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    &__btn{
+      box-sizing: border-box;
+      width: 318px;
+      height: 50px;
+      border: 1px solid transparent;
+      margin-bottom: 40px;
+      i{
+        display: inline-block;
+        width: 14px;
+        height: 17.5px;
+        margin-right: 16px;
+      }
+    }
+    &__description{
+      width: 570px;
+      height: calc(179.1px - 16px - 107px);
+      text-align: right;
+      position: relative;
+      border-top: 1px solid $normal-gray;
+      a{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        text-decoration: none;
+        color: $link-text-blue;
+      }
+    }
+  }
+}
+
+// 本人情報の登録
+.user-mypage-wrapper__main__box__contents{
+  width: 100%;
+  padding: 64px;
+  box-sizing: border-box;
+  .signup-label{
+    line-height: auto;
+  }
+  a{
+    display: block;
+    width: auto;
+    margin-top: 8px;
+    text-align: right;
+    color: $link-text-blue;
+    text-decoration: none;
+    &:hover{
+      opacity: 0.7;
+      text-decoration: underline;
+    }
+  }
+  &__notice{
+    margin-bottom: 40px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 8px;
+  }
+  .mypage-form-container{
+    margin-top: 40px;
+  }
+  .content-end{
+    margin-top: 40px;
+  }
+  .submit-btn{
+    cursor: pointer;
+  }
+}
+
+
+// 画面下部のカメラ部
+.bottom-camera{
+  background-color: red;
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  color: $normal-white;
+  z-index: 100;
+  text-align: center;
+  p{
+    margin-top: 32px;
+    font-size: 22px;
+  }
+  a{
+    opacity: 1;
+    color: $normal-white;
+  }
+  i{
+    display: inline-block;
+    font-size: 54px;
+    height: auto;
+  }
+}
+@media screen and (max-width:767px){
+  .bottom-camera{
+    width: 80px;
+    height: 80px;
+    right: -14px;
+    bottom:-14px;
+    text-align: center;
+    p{
+      font-size: 14px;
+      margin-top: 14px;
+    }
+    i{
+      font-size: 24px;
+    }
+  }
+}
+
+
+// パンくず
+.breadcrumbs{
+  @extend %centering;
+  @extend %global-font;
+  height: 49px;
+  width: 100vw;
+  border-top: 1px solid #eee;
+  background-color: $normal-white;
+  font-size: 14px;
+  box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.16);
+  position: relative;
+  z-index: 10;
+  &__wrapper{
+    width: 1020px;
+    &__content{
+      display: flex;
+      a{
+        text-decoration: none;
+        color: #333333;
+        &:hover{
+          opacity: 0.4;
+          text-decoration: underline;
+        }
+      }
+      i{
+        margin:0 10px;
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+.current_page{
+  &__now{
+    font-weight: bold;
+  }
+}

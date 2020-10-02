@@ -1,0 +1,116 @@
+= render "layouts/main-header"
+-content_for :current_page do
+  %span.current_page
+    %span.current_page__now
+      マイページ
+= render "layouts/breadcrumbs"
+.user-mypage-wrapper
+  .user-mypage-wrapper__main
+    .user-mypage-wrapper__main__profile
+      .user-mypage-wrapper__main__profile__container
+        .user-mypage-wrapper__main__profile__container__image
+          = image_tag "https://static.mercdn.net/images/member_photo_noimage_thumb.png", "alt width":"60", height:"60"
+        .user-mypage-wrapper__main__profile__container__content.bold
+          %h2 
+            = @user.nickname
+        .user-mypage-wrapper__main__profile__container__status
+          .user-mypage-wrapper__main__profile__container__status__content
+            .user-mypage-wrapper__main__profile__container__status__content__name
+              評価
+            .user-mypage-wrapper__main__profile__container__status__content__number.bold
+              = rand(100)
+          .user-mypage-wrapper__main__profile__container__status__content
+            .user-mypage-wrapper__main__profile__container__status__content__name__products
+              出品数
+            .user-mypage-wrapper__main__profile__container__status__content__number.bold
+              = @user.products.count
+      .user-mypage-wrapper__main__profile__contents.tabs
+        .tabs
+          %input#notice.user-mypage-wrapper__main__profile__contents__notice{checked: "checked", name: "tab_item", type: "radio"}/
+          %label.tab_item{for: "notice"} お知らせ
+          %input#task{name: "tab_item", type: "radio"}/
+          %label.tab_item.user-mypage-wrapper__main__profile__contents__task{for: "task"} やることリスト
+          #notice_content.tab_content
+            .tab_content_description__content
+              .tab_content_description__content__image
+                = image_tag "//static.mercdn.net/images/mercari_profile.png", alt:"", height:"48"
+              .tab_content_description__content__body
+                .tab_content_description__content__body__message
+                  message1
+                .tab_content_description__content__body__time
+                  %i.far.fa-clock
+                  0日前(秒前、分前、時間前)
+              .tab_content_description__content__arrow
+                %i.fas.fa-chevron-right
+            .tab_content_description__content
+              .tab_content_description__content__image
+                = image_tag "//static.mercdn.net/images/mercari_profile.png", alt:"", height:"48"
+              .tab_content_description__content__body
+                .tab_content_description__content__body__message
+                  message1
+                .tab_content_description__content__body__time
+                  %i.far.fa-clock
+                  0日前(秒前、分前、時間前)
+              .tab_content_description__content__arrow
+                %i.fas.fa-chevron-right
+            .tab_content_description__content
+              .tab_content_description__content__image
+                = image_tag "//static.mercdn.net/images/mercari_profile.png", alt:"", height:"48"
+              .tab_content_description__content__body
+                .tab_content_description__content__body__message
+                  message1
+                .tab_content_description__content__body__time
+                  %i.far.fa-clock
+                  0日前(秒前、分前、時間前)
+              .tab_content_description__content__arrow
+                %i.fas.fa-chevron-right
+            .tab_content_description__content
+              .tab_content_description__content__image
+                = image_tag "//static.mercdn.net/images/mercari_profile.png", alt:"", height:"48"
+              .tab_content_description__content__body
+                .tab_content_description__content__body__message
+                  message1
+                .tab_content_description__content__body__time
+                  %i.far.fa-clock
+                  0日前(秒前、分前、時間前)
+              .tab_content_description__content__arrow
+                %i.fas.fa-chevron-right
+            .tab_content_description__content
+              .tab_content_description__content__image
+                = image_tag "//static.mercdn.net/images/mercari_profile.png", alt:"", height:"48"
+              .tab_content_description__content__body
+                .tab_content_description__content__body__message
+                  message1
+                .tab_content_description__content__body__time
+                  %i.far.fa-clock
+                  0日前(秒前、分前、時間前)
+              .tab_content_description__content__arrow
+                %i.fas.fa-chevron-right
+            .tab_content_description__content__back
+              .tab_content_description__content__back__message
+                %p 一覧を見る
+          #task_content.tab_content
+            .tab_content_description__task.nothing_image
+              現在やることリストはありません。
+    .user-mypage-wrapper__main__products
+      .user-mypage-wrapper__main__products__title
+        %h2 購入した商品
+      .tabs2
+        %input#trading{checked: "checked", name: "tab_item2", type: "radio"}/
+        %label.tab_item2{for: "trading"} 取引中
+        %input#traded{name: "tab_item2", type: "radio"}/
+        %label.tab_item2{for: "traded"} 過去の取引
+        #trading_content.tab_content
+          .tab_content_description.nothing_image
+            %p 現在取引している商品がありません。
+        #traded_content.tab_content
+          .tab_content_description.nothing_image
+            %p 過去に取引した商品がありません。
+  = render "layouts/user-navi"  
+
+-# footer
+= render "layouts/footer-advertisement"
+= render "layouts/footer-black"
+
+-# 右下の赤いカメラ
+=render "layouts/bottom-camera"

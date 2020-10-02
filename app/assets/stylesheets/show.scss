@@ -1,0 +1,430 @@
+@import "variable";
+// ページ下部の「ログインユーザー」と「カテゴリ」のその他商品共通部分を定義
+@mixin products($product-type){
+  &__other-products{
+  width: 700px;
+  margin: 0 auto;
+    &__#{$product-type}{
+      &__title{
+        font-size: 22px;
+        margin: 24px 0 8px;
+        font-weight: bold;
+        a{
+          color: $link-text-blue;
+          text-decoration: none;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
+      &__products{
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -20px;
+        &__product{
+          width: 220px;
+          margin: 0 20px 20px 0;
+          a{
+            text-decoration: none;
+          }
+          &__link{
+            &__image{
+              margin: 0;
+              height: 220px;
+            }
+            &__body{
+              height: 110px;
+              padding: 16px;
+              background: $normal-white;
+              color: #333;
+              box-sizing: border-box;
+              &__name{
+                font-weight: 400;
+                height: 3em;
+                line-height: 1.5;
+                word-break: break-word;
+                white-space: white;
+                overflow: hidden;
+              }
+              &__num{
+                display: flex;
+                justify-content: space-between;
+                &__price{
+                  font-weight: 600;
+                }
+                &__heart{
+                  i{
+                    color: rgb(204, 204, 204);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// ここまでが変数定義
+
+.container{
+  background: #f5f5f5;
+  width: 100%;
+  margin: 0 auto 0;
+  padding-top: 40px;
+  &__product-details{
+    width: 700px;
+    height: 100%;
+    background-color: $normal-white;
+    margin: 0 auto 0;
+    padding: 24px 40px 40px;
+    box-sizing: border-box;
+    &__product-name{
+      text-align: center;
+      font-size: 24px;
+      line-height: 1.4;
+      font-weight: bold;
+    }
+    &__main{
+      margin: 16px 0 0;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      &__images{
+        min-width: 300px;
+        max-width: 300px;
+        min-height: 375px;
+        width: 100%;
+        background-color: $hover-gray;
+        &__display{
+          min-width: 300px;
+          max-width: 300px;
+          min-height: 375px;
+          position: relative;
+          overflow: hidden;
+          &__up{
+            display: flex;
+          }
+          &__down{
+            display: flex;
+            flex-wrap: wrap;
+            &__thumbnail-image{
+              opacity: .4;
+              height: 60px;
+              &.thumbnail-current{
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+      &__detail{
+        max-width: 300px;
+        height: 420px;
+        width: 100%;
+        tbody{
+          tr{
+            th{
+              width: 39%;
+              text-align: left;
+              background: $hover-gray;
+              border: 1px solid #f5f5f5;
+              padding: 8px;
+              font-size: 14px;
+              color: $default-font-black;
+            }
+            td{
+              border: 1px solid #f5f5f5;
+              padding: 8px;
+              width: 61%;
+              a{
+                text-decoration: none;
+                color: $link-text-blue;
+                display: block;
+                &:hover{
+                  text-decoration: underline;
+                }
+              }
+              div.evaluation{
+                display: flex;
+                align-items: center;
+                div{
+                  i.fa-laugh{
+                    color: #ef5185;
+                    margin-left: -16px;
+                  }
+                }
+                div{
+                  margin: 8px 0 0 16px;
+                  i.fa-meh{
+                    color: #fba933;
+                  }
+                }
+                div{
+                  margin: 0 0 0 16px;
+                  i.fa-sad-tear{
+                    color: #6ab5d8;
+                  }
+                }
+              }
+            }
+            td.category{
+              font-size: 14px;
+              i{
+                &:hover{
+                  text-decoration: underline;
+                }
+              }
+              span{
+                margin-top: -5px;
+                @extend %global-font;
+                font-weight: 3.12;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__price{
+      margin: 24px 0 0;
+      text-align: center;
+      &__amount{
+        margin: 0 16px 0 0;
+        font-size: 50px;
+      }
+      &__tax{
+        font-size: 10px;
+      }
+    }
+    &__message{
+      text-align: center;
+      .submit-btn{
+        margin-top: 16px;
+      }
+      p{
+        margin-top: 16px;
+      }
+      &__money{
+        display: inline-block;
+        position: relative;
+        line-height: 1.5;
+        color: $normal-white;
+        background: #05B0B4;
+        margin: 20px 0 0 0;
+        padding: 8px;
+        border-radius: 4px;
+        &::after{
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 10px 7.5px 0 7.5px;
+          border-color: #05B0B4 transparent; 
+        }
+      }
+    }
+    &__purchase-screen-button{
+      display: block;
+      margin-top: 16px;
+      background: $normal-red;
+      color: $normal-white;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 60px;
+    }
+    &__product-description{
+      padding: 32px 0 0;
+      font-size: 18px;
+      line-height: 1.5;
+      &__inner{
+        white-space: pre-wrap;
+      }
+    }
+    &__buttons{
+      margin: 16px 0 0;
+      display: flex;
+      justify-content: space-between;
+      &__left{
+        &__heart{
+          color: #333;
+          border: 1px solid #f5f5f5;
+          background: #f5f5f5;
+          padding: 6px 12px;
+          border-radius: 40px;
+          cursor: pointer;
+          i{
+            font-size: 14px;
+            color: #ccc;
+          }
+          span{
+            font-size: 14px;
+            margin: 1px 0 0 8px;
+          }
+        }
+        &__report{
+          @extend .container__product-details__buttons__left__heart;
+          margin: 0 0 0 16px;
+        }
+      }
+      &__right{
+        margin: auto 0;
+        a{
+        color: $link-text-blue;
+        text-decoration: none;
+        font-size: 14px;
+        }
+        a:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  &__comment{
+    width: 700px;
+    background: $normal-white;
+    margin: 8px auto;
+    &__container{
+      padding: 24px;
+      &__message-form{
+        &__attention{
+          padding: 8px;
+          font-size: 14px;
+          background: #fff6de;
+        }
+        &__text{
+          margin: 8px 0 0;
+          width: 100%;
+          max-width: 100%;
+          min-height: 104px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          font-size: 16px;
+          line-height: 1.5;
+          box-sizing: border-box;
+        }
+        &__comment-btn{
+          width: 100%;
+          margin: 8px 0 0;
+          text-align: center;
+          background: #aaa;
+          border: 1px solid #aaa;
+          line-height: 48px;
+          cursor: pointer;
+          span{
+            color: $normal-white;
+            width: 100px;
+            text-align: center;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  &__product-link{
+    margin: 24px auto 0;
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+    &__prev{
+      a{
+        text-decoration: none;
+        color: $link-text-blue;
+      }
+      a:hover{
+        text-decoration: underline;
+      }
+    }
+    &__next{
+      a{
+        text-decoration: none;
+        color: $link-text-blue;
+      }
+      a:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+  &__social-media{
+    &__box{
+      margin: 24px auto;
+      padding: 32px 0 24px;
+      width: 700px;
+      background: $normal-white;
+      display: flex;
+      justify-content: center;
+      &__facebook{
+        margin: 0 8px 8px 0;
+        a{
+          color: #385185;
+          border-radius: 4px;
+        }
+      }
+      &__twitter{
+        margin: 0 8px 8px 0;
+        a{
+          color: #5d9dc9;
+          border-radius: 4px;
+        }
+      }
+      &__line{
+        margin: 0 8px 8px 0;
+        a{
+          color: #00c137;
+          border-radius: 4px;
+        }
+      }
+      &__pinterest{
+        margin: 0 8px 8px 0;
+        a{
+          color: #aa262a;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  // 要素の一部が異なるまとまり部分を変数化して呼び出す
+  @include products(login-user);
+  @include products(same-category);
+
+  &__bread-crumbs{
+    border-top: 1px solid $normal-gray;
+    display: block;
+    margin-top: 40px;
+    &__list{
+      overflow: visible;
+      width: 700px;
+      margin: 0 auto;
+      padding: 16px 0;
+      white-space: normal;
+      &__mercari{
+        display: inline-block;
+        cursor: pointer;
+        a{
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+        }
+        a:hover{
+          text-decoration: underline;
+        }
+        i{
+          margin: 0 8px;
+          font-size: 9px;
+          color: #888;
+        }
+      }
+      &__current-product{
+        display: inline-block;
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@import "users";
+
+.user-mypage-wrapper{
+
+  &__main{
+    background-color: $normal-white;
+    &__box{
+      &__title{        
+        &__inner{
+          padding: 64px;
+          &__content{
+            max-width: 320px;
+            margin: 0 auto;
+            &__btn{
+              background: $normal-red;
+              border: 1px solid $normal-red;
+              color: $normal-white;
+              display: block;
+              width: 100%;
+              line-height: 48px;
+              font-size: 14px;
+              transition: all ease-out .3s;
+              cursor: pointer;
+              text-align: center;
+              overflow: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+}

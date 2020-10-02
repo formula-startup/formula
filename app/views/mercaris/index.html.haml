@@ -1,0 +1,85 @@
+= render "/layouts/main-header"
+
+.main
+  .main__announcement
+    %ul.main__announcement__pictures
+      %li.main__announcement__pictures__picture2
+        .main__announcement__pictures__picture2__content
+
+      %li.main__announcement__pictures__picture3
+        .main__announcement__pictures__picture3__content
+          .main__announcement__pictures__picture3__content__description
+            = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/top-banner-main-device-1f627e51e488f6ca35feaa6a08b79736.png", size: "440x390"
+            .main__announcement__pictures__picture3__content__description__about
+              .main__announcement__pictures__picture3__content__description__about__text1
+                スマホで かんたん
+                %br
+                フリマアプリ
+              %p.main__announcement__pictures__picture3__content__description__about__text2
+                メルカリはスマホカメラからすぐに出品できる
+                %br
+                購入時も安心な独自システムのアプリです
+              .main__announcement__pictures__picture3__content__description__about__install
+                = link_to "https://itunes.apple.com/jp/app/id667861049?l=ja&mt=8" do
+                  = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/app-store-a5c17948c6fd6d5b60b13d421cd60b35.svg"
+                = link_to "https://play.google.com/store/apps/details?id=com.kouzoh.mercari&hl=ja" do
+                  = image_tag src="https://web-jp-assets.mercdn.net/_next/static/images/google-play-495575abb895b405aa6336b2a4304958.svg"
+    
+  .main__categories
+    %h2.main__categories__title
+      人気のカテゴリー
+    .main__categories__tags
+      %ul
+        %li
+          = link_to "" do
+            技術書（プログラミング）
+      %ul
+        %li
+          = link_to "" do
+            ぬいぐるみ
+      %ul
+        %li
+          = link_to "" do
+            釣具
+      %ul
+        %li
+          = link_to "" do
+            ロボット
+  = render "/products/index"
+
+  .main__categories
+    %h2.main__categories__title
+      人気のブランド
+    .main__categories__tags
+      %ul
+        %li
+          = link_to "" do
+            テックエキスパート
+      %ul
+        %li
+          = link_to "" do
+            テックマスター
+      %ul
+        %li
+          = link_to "" do
+            テックアカデミー
+      %ul
+        %li
+          = link_to "" do
+            LINE
+      %ul
+        %li
+          = link_to "" do
+            DAIWA
+      %ul
+        %li
+          = link_to "" do
+            SHARP
+
+  = render "/products/index"
+
+%footer
+  =render "layouts/footer-advertisement"
+  %nav
+  = render "layouts/footer-black"
+  = render "layouts/bottom-camera"
